@@ -33,7 +33,7 @@ module CoingeckoRuby
     end
 
     def url
-      if @client_version == "pro"
+      if @client_version == :pro
         BASE_URL_PRO
       else
         BASE_URL
@@ -41,8 +41,8 @@ module CoingeckoRuby
     end
 
     def auth
-      if @client_version == "pro"
-        "?x_cg_pro_api_key=" + ENV["COINBASE_PRO_API_KEY"]
+      if @client_version == :pro && @api_key
+        "?x_cg_pro_api_key=" + @api_key
       else
         ""
       end
