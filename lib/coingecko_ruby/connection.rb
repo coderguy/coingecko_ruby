@@ -13,6 +13,7 @@ module CoingeckoRuby
 
     def request(method, endpoint, **opts)
       connection = create_connection
+      endpoint = endpoint + auth()
       response = connection.send(method, endpoint, opts)
       response.body
     rescue Faraday::Error => e
@@ -21,7 +22,7 @@ module CoingeckoRuby
     end
 
     def create_connection
-      url = url() + endpoint + auth()
+      url = url()
 
       connection = Faraday.new(url: url) do |c|
         c.use Faraday::Response::RaiseError
